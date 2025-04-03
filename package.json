@@ -12,6 +12,8 @@
     "@clerk/nextjs": "^6.12.12",
     "daisyui": "^5.0.12",
     "lucide-react": "^0.487.0",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.1",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
