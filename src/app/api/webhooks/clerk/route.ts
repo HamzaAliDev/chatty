@@ -1,7 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { clerkClient, WebhookEvent } from '@clerk/nextjs/server'
-import { createUser } from '@/actions/userAction'
+import { createUser, deleteUser, updateUser } from '@/actions/userAction'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
@@ -52,32 +52,63 @@ export async function POST(req: Request) {
   const { id } = evt.data
   const eventType = evt.type
 
-//   create user in mongodb
-if(eventType === 'user.created') {
-    const {id, email_addresses, first_name, last_name, image_url} = evt.data
+  //   create user in mongodb
+  if (eventType === 'user.created') {
+    const { id, email_addresses, first_name, last_name, image_url } = evt.data
 
     const email = email_addresses[0].email_address
     const user = {
-        clerkId: id,
-        email,
-        fullName: `${first_name} ${last_name}`,
-        profilePic: image_url,
+      clerkId: id,
+      email,
+      fullName: `${first_name} ${last_name}`,
+      profilePic: image_url,
     }
 
     console.log('User created:', user)
     // Save user to database
     const newUser = await createUser(user)
-    if(newUser) {
-        const client = await clerkClient();
-        await client.users.updateUserMetadata(id, {
-            publicMetadata: {
-               userId: newUser._id,
-            },
-        })
+    if (newUser) {
+      const client = await clerkClient();
+      await client.users.updateUserMetadata(id, {
+        publicMetadata: {
+          userId: newUser._id,
+        },
+      })
     }
 
     return NextResponse.json({ message: 'User created successfully', user: newUser })
-}
+  }
+
+  //   Update user in mongodb
+  if (eventType === 'user.updated') {
+    const { id, email_addresses, first_name, last_name, image_url } = evt.data
+
+    const email = email_addresses[0].email_address
+    const updatedUser = {
+      clerkId: id,
+      email,
+      fullName: `${first_name} ${last_name}`,
+      profilePic: image_url,
+    }
+
+    console.log('User updated:', updatedUser)
+    // Save user to database
+    const updatedUserData = await updateUser(updatedUser)
+
+    return NextResponse.json({ message: 'User updated successfully', user: updatedUserData })
+  }
+
+  // delete user in mongodb
+  if (eventType === 'user.deleted') {
+    const { id } = evt.data
+
+    console.log('User deleted:', id)
+    // Save user to database
+    const deletedUser = await deleteUser(id as string)
+    if (deletedUser) {
+      return NextResponse.json({ message: 'User deleted successfully', user: deletedUser })
+    }
+  }
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
   console.log('Webhook payload:', body)
 

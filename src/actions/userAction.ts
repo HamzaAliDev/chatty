@@ -28,3 +28,30 @@ export async function createUser(user: IUser): Promise<IUser> {
         throw new Error('Error creating user');
     }
 }
+
+export async function updateUser(user: IUser): Promise<IUser> {
+    await dbConnect();
+    try {
+        const { clerkId, email, fullName, profilePic } = user;
+        const updatedUser = await User.findOneAndUpdate(
+            { clerkId },
+            { email, fullName, profilePic },
+            { new: true }
+        );
+        return JSON.parse(JSON.stringify(updatedUser));
+    } catch (error) {
+        console.error('Error updating user:', error);
+        throw new Error('Error updating user');
+    }
+}
+
+export async function deleteUser(clerkId: string): Promise<IUser> {
+    await dbConnect();
+    try {
+        const deletedUser = await User.findOneAndDelete({ clerkId });
+        return JSON.parse(JSON.stringify(deletedUser));
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        throw new Error('Error deleting user');
+    }
+}
