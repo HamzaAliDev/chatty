@@ -1,4 +1,4 @@
-"use client"; // This ensures the component runs only on the client side
+"use client";
 
 import { useEffect } from "react";
 import { useThemeStore } from "@/store/useThemeStore";

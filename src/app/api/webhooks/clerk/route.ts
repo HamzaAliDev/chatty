@@ -64,7 +64,7 @@ export async function POST(req: Request) {
       profilePic: image_url,
     }
 
-    console.log('User created:', user)
+    // console.log('User created:', user)
     // Save user to database
     const newUser = await createUser(user)
     if (newUser) {
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
       profilePic: image_url,
     }
 
-    console.log('User updated:', updatedUser)
+    // console.log('User updated:', updatedUser)
     // Save user to database
     const updatedUserData = await updateUser(updatedUser)
 
@@ -102,7 +102,7 @@ export async function POST(req: Request) {
   if (eventType === 'user.deleted') {
     const { id } = evt.data
 
-    console.log('User deleted:', id)
+    // console.log('User deleted:', id)
     // Save user to database
     const deletedUser = await deleteUser(id as string)
     if (deletedUser) {

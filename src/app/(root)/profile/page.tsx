@@ -1,10 +1,12 @@
-import { UserProfile } from '@clerk/nextjs'
 import React from 'react'
+import { UserProfile } from '@clerk/nextjs'
 
 export default function Page() {
     return (
-        <div className='container flex items-center justify-center sm:p-4  py-10 lg:justify-center'>
-            <UserProfile routing="hash" />
+        <div className=" grid">
+            <div className="flex flex-col justify-center items-center p-4 sm:p-12">
+                <UserProfile routing="hash" />
+            </div>
         </div>
     )
 }

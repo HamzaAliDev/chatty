@@ -1,7 +1,16 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
-    themes: all;
-  }
+  themes: all;
+}
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 /*   
 :root {
   --background: #ffffff;

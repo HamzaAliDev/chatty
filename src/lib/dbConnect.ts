@@ -8,7 +8,7 @@ const connection: ConnectionObject = {};
 
 async function dbConnect(): Promise<void> {
     if (connection.isConnected) {
-        console.log("Using existing connection");
+        // console.log("Using existing connection");
         return;
 
     }
@@ -17,7 +17,7 @@ async function dbConnect(): Promise<void> {
         const db = await mongoose.connect(process.env.MONGODB_URI || '', { dbName: process.env.DB_NAME, });
 
         connection.isConnected = db.connections[0].readyState;
-        console.log("New connection created");
+        // console.log("New connection created");
         console.log("Database Connected");
         // console.log("db", db);
     } catch (error) {

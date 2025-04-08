@@ -1,11 +1,19 @@
 'use client'
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { useAuthStore } from "@/store/useAuthStore";
+import { SignOutButton } from "@clerk/nextjs";
 import { LogOut, MessageSquare, Settings, User } from "lucide-react";
 import Link from 'next/link';
 
 
 export default function Navbar() {
-    const { user } = useUser()
+    const { authUser, setAuthUser, setAuthUserId, disconnectSocket } = useAuthStore()
+
+    const handleLogout = () => {
+        setAuthUser(null)
+        setAuthUserId(null)
+
+        disconnectSocket()
+    }
 
     return (
         <header
@@ -32,7 +40,7 @@ export default function Navbar() {
                             <span className="hidden sm:inline">Settings</span>
                         </Link>
 
-                        {user && (
+                        {authUser && (
                             <>
                                 <Link href={"/profile"} className={`btn btn-sm gap-2`}>
                                     <User className="size-5" />
@@ -40,7 +48,7 @@ export default function Navbar() {
                                 </Link>
 
                                 <SignOutButton>
-                                    <button className="flex gap-2 items-center cursor-pointer" >
+                                    <button className="flex gap-2 items-center cursor-pointer" onClick={handleLogout} >
                                         <LogOut className="size-5" />
                                         <span className="hidden sm:inline">Logout</span>
                                     </button>
