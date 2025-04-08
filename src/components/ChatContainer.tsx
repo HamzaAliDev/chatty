@@ -23,7 +23,7 @@ export default function ChatContainer() {
         return () => {
             unsubscribeFromMessages()
         }
-    }, [selectedUser, authUserId]);
+    }, [selectedUser, authUserId, fetchMessages, subscribeToMessages, unsubscribeFromMessages]);
 
     useEffect(() => {
         if (messageEndRef.current && messages) {
@@ -49,7 +49,7 @@ export default function ChatContainer() {
                     <div
                         key={message._id}
                         className={`chat ${message.senderId === authUserId ? "chat-end" : "chat-start"}`}
-                        // ref={messageEndRef}
+                    // ref={messageEndRef}
                     >
                         <div className=" chat-image avatar">
                             <div className="size-10 rounded-full border">

@@ -20,9 +20,9 @@ interface SetAuthUserId {
     (id: string | null): void;
 }
 
-interface FetchOnlineUsers {
-    (): Promise<void>;
-}
+// interface FetchOnlineUsers {
+//     (): Promise<void>;
+// }
 
 const BASEURL = process.env.NEXT_PUBLIC_SOCKET_IO_BASE_URL || '';
 export const useAuthStore = create<AuthStore>((set, get) => ({

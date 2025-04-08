@@ -98,7 +98,7 @@ export default function MessageInput() {
                     <div className="relative">
                         <NextImage
                             src={imagePreview}
-                            alt="Preview"
+                            alt="Preview Image"
                             width={80}
                             height={80}
                             className="w-20 h-20 object-cover rounded-lg border border-zinc-700"

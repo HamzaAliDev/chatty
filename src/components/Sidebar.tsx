@@ -4,6 +4,7 @@ import { useChatStore } from "@/store/useChatStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import SidebarSkeleton from "../components/SidebarSkeleton";
 import { Users } from "lucide-react";
+import Image from "next/image";
 
 export default function Sidebar() {
     const { fetchUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
@@ -14,7 +15,7 @@ export default function Sidebar() {
         if (authUserId) {
             fetchUsers(authUserId);
         }
-    }, [authUserId]);
+    }, [authUserId, fetchUsers]);
 
 
     const filteredUsers = showOnlineOnly
@@ -56,9 +57,11 @@ export default function Sidebar() {
             `}
                     >
                         <div className="relative mx-auto lg:mx-0">
-                            <img
+                            <Image
                                 src={user.profilePic || "/avatar.png"}
                                 alt={user.fullName}
+                                width={40}
+                                height={40}
                                 className="size-12 object-cover rounded-full"
                             />
                             {onlineUsers.includes(user.clerkId ?? "") && (

@@ -29,7 +29,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
 
         setLoading(false);
 
-    }, [isSignedIn, user]);
+    }, [isSignedIn, user, setAuthUser, setAuthUserId, connectSocket]);
 
     if (loading) {
         return (
