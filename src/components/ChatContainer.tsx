@@ -23,7 +23,7 @@ export default function ChatContainer() {
         return () => {
             unsubscribeFromMessages()
         }
-    }, [selectedUser]);
+    }, [selectedUser, authUserId]);
 
     useEffect(() => {
         if (messageEndRef.current && messages) {

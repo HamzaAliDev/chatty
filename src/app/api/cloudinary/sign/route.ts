@@ -13,7 +13,7 @@ interface CloudinarySignatureResponse {
     cloudName: string | undefined;
 }
 
-export async function GET(request: Request): Promise<Response> {
+export async function GET(): Promise<Response> {
     try {
         const timestamp: number = Math.round(new Date().getTime() / 1000);
 

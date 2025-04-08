@@ -1,5 +1,6 @@
 'use client'
 import React, { useRef, useState } from 'react'
+import NextImage from 'next/image';
 import { useChatStore } from '../store/useChatStore'
 import { Image, LoaderIcon, Send, X } from 'lucide-react'
 import toast from 'react-hot-toast';
@@ -95,9 +96,11 @@ export default function MessageInput() {
             {imagePreview && (
                 <div className="mb-3 flex items-center gap-2">
                     <div className="relative">
-                        <img
+                        <NextImage
                             src={imagePreview}
                             alt="Preview"
+                            width={80}
+                            height={80}
                             className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
                         />
                         <button

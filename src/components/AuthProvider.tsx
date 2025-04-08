@@ -15,7 +15,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
             // console.log("Logged in Clerk user:", user);
 
             const { firstName, lastName, imageUrl, createdAt } = user;
-            let userData = {
+            const userData = {
                 firstName: firstName || "",
                 lastName: lastName || "",
                 imageUrl: imageUrl || "",

@@ -65,6 +65,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
             }
         } catch (error: unknown) {
             toast.error("Failed to fetch messages");
+            console.error("Error fetching messages:", error);
         } finally {
             set({ isMessagesLoading: false });
         }
@@ -88,6 +89,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
             }
         } catch (error) {
             toast.error("Failed to send message");
+            console.error("Error sending message:", error);
         }
     },
 

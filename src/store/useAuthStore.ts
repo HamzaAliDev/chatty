@@ -8,7 +8,7 @@ interface AuthStore {
     socket: ReturnType<typeof io> | null;
     setAuthUser: (user: { firstName: string; lastName: string; imageUrl: string; createdAt: string } | null) => void;
     setAuthUserId: (id: string | null) => void;
-    fetchOnlineUsers: () => Promise<void>;
+    // fetchOnlineUsers: () => Promise<void>;
     connectSocket: () => void;
     disconnectSocket: () => void;
 }
@@ -39,13 +39,13 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         set({ authUserId: id });
     }) as SetAuthUserId,
 
-    fetchOnlineUsers: (async () => {
-        try {
+    // fetchOnlineUsers: (async () => {
+    //     try {
 
-        } catch (error) {
+    //     } catch (error) {
 
-        }
-    }) as FetchOnlineUsers,
+    //     }
+    // }) as FetchOnlineUsers,
 
 
 
