@@ -9,7 +9,6 @@ import { useAuthStore } from '@/store/useAuthStore';
 interface ImageChangeEvent extends React.ChangeEvent<HTMLInputElement> {
     target: HTMLInputElement & { files: FileList | null };
 }
-interface HandleSendMessageEvent extends React.FormEvent<HTMLFormElement> { }
 
 export default function MessageInput() {
     const [text, setText] = useState('')
@@ -40,7 +39,7 @@ export default function MessageInput() {
     }
 
 
-    const handleSendMessage = async (e: HandleSendMessageEvent): Promise<void> => {
+    const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault()
         if (!text.trim() && !imagePreview) return;
 
